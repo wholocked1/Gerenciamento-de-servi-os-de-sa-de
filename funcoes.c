@@ -9,7 +9,7 @@ Lista *criar_lista(){ //função que cria a lista sem nenhuma informação
     return l;
 }
 
-Elista *cria_info(){
+Elista *cria_info(){ //cria o ponteiro do novo cliente recebendo as informações por scanf
     Elista *cliente = malloc(sizeof(Elista));
     printf("Nome: ");
     scanf("%s", cliente->dados.nome);
@@ -23,4 +23,17 @@ Elista *cria_info(){
     scanf("%d", cliente->dados.data.mes);
     printf("Ano: ");
     scanf("%d", cliente->dados.data.ano);
+    cliente->prox = NULL;
+}
+
+void inserir(Lista *l){ //função que inseri o novo cliente na lista
+    Elista *c = cria_info();
+    if(l->qtde == 0){
+        l->inicio = c;
+    }else{
+        Elista *ant = l->inicio;
+        c->prox = ant;
+        l->inicio = c;
+    }
+    l->qtde++;
 }
