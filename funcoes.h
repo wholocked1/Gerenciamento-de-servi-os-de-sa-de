@@ -27,3 +27,4 @@ typedef struct Lista //struct que vai salvar o inicio da lista e a quantidade de
 Lista *criar_lista();
 Elista *cria_info();
 void inserir(Lista *l);
+void consulta(Lista *l);

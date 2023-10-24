@@ -37,3 +37,22 @@ void inserir(Lista *l){ //função que inseri o novo cliente na lista
     }
     l->qtde++;
 }
+
+void consulta(Lista *l){
+    printf("RG da conta que deseja ser consultado: ");
+    char RG[8];
+    scanf("%s", RG);
+    Elista *c = l->inicio;
+    for(int i = 0; i < l->qtde; i++){
+        if(c->dados.rg == RG){
+            break;
+        }
+        c = c->prox;
+    }
+    if(c->dados.rg != RG){
+        printf("RG não cadastrado!\n");
+        return;
+    }
+    printf("Nome: %s; Idade: %s; Data de criação: %d/%d/%d\n", c->dados.nome, c->dados.idade, c->dados.data.dia,
+         c->dados.data.mes, c->dados.data.ano);
+}
