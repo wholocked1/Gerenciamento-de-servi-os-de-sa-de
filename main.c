@@ -1,3 +1,3 @@
-#import <stdlib.h>
-#import <stdio.h>
-#import "funcoes.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include "funcoes.h"
