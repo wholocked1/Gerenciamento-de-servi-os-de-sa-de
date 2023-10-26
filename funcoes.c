@@ -38,7 +38,7 @@ void inserir(Lista *l){ //função que inseri o novo cliente na lista
     l->qtde++;
 }
 
-void consulta(Lista *l){
+void consulta(Lista *l){ //função de consulta de clientes já existentes
     printf("RG da conta que deseja ser consultado: ");
     char RG[8];
     scanf("%s", RG);
@@ -55,4 +55,16 @@ void consulta(Lista *l){
     }
     printf("Nome: %s; Idade: %s; Data de criação: %d/%d/%d\n", c->dados.nome, c->dados.idade, c->dados.data.dia,
          c->dados.data.mes, c->dados.data.ano);
+}
+
+void lista_clientes(Lista *l){ //mostra a lista de clientes cadastrados no sistema
+
+}
+
+void atualiza_cliente(Lista *l){ //função que atualiza um cliente já cadastrados
+
+}
+
+void remover_cliente(Lista *l){ //remove um cliente da lista de clientes cadastrados
+
 }
