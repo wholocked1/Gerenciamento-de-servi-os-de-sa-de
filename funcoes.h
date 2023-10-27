@@ -28,3 +28,5 @@ Lista *criar_lista();
 Elista *cria_info();
 void inserir(Lista *l);
 void consulta(Lista *l);
+void lista_clientes(Lista *l);
+void atualiza_cliente(Lista *l);
