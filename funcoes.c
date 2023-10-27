@@ -17,7 +17,7 @@ Elista *cria_info(){ //cria o ponteiro do novo cliente recebendo as informaçõe
     scanf("%d", cliente->dados.idade);
     printf("RG: ");
     scanf("%s", cliente->dados.rg);
-    printf("Dia: ");
+    printf("Dia: "); //pode fazer usando o struct da biblioteca de data
     scanf("%d", cliente->dados.data.dia);
     printf("Mês: ");
     scanf("%d", cliente->dados.data.mes);
@@ -58,7 +58,13 @@ void consulta(Lista *l){ //função de consulta de clientes já existentes
 }
 
 void lista_clientes(Lista *l){ //mostra a lista de clientes cadastrados no sistema
-
+    printf("Lista de clientes: \n");
+    Elista *c = l->inicio;
+    for(int i = 0; i < l->qtde; i++){
+        printf("Nome: %s; Idade: %d; RG: %s; Data de criação: %d/%d/%d\n", c->dados.nome, c->dados.idade, c->dados.rg,
+             c->dados.data.dia, c->dados.data.mes, c->dados.data.ano);
+    }
+    printf("\n");
 }
 
 void atualiza_cliente(Lista *l){ //função que atualiza um cliente já cadastrados
