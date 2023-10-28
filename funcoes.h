@@ -30,3 +30,4 @@ void inserir(Lista *l);
 void consulta(Lista *l);
 void lista_clientes(Lista *l);
 void atualiza_cliente(Lista *l);
+void remover_cliente(Lista *l);

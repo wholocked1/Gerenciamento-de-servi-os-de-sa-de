@@ -94,5 +94,22 @@ void atualiza_cliente(Lista *l){ //função que atualiza um cliente já cadastra
 }
 
 void remover_cliente(Lista *l){ //remove um cliente da lista de clientes cadastrados
-
+    printf("RG da conta que deseja ser removida: ");
+    int rg[8];
+    scanf("%s", rg);
+    Elista *atual = l->inicio;
+    Elista *ant = NULL;
+    for(int i = 0; i < l->qtde; i++){
+        if(atual->dados.rg == rg){
+            break;
+        }
+        ant = atual;
+        atual = atual->prox;
+    }
+    if(atual->prox == NULL){
+        ant->prox = NULL;
+    }else{
+        ant->prox = atual->prox;
+    }
+    free(atual);
 }
