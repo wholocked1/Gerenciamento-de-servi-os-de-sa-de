@@ -3,58 +3,58 @@
 #include "funcoes.h"
 
 Lista *criar_lista(){ //função que cria a lista sem nenhuma informação
-    Lista *l = malloc(sizeof(Lista));
+    Lista *l = malloc(sizeof(Lista)); //aloca memória do struct
     l->inicio = NULL;
     l->qtde = 0;
     return l;
 }
 
 Elista *cria_info(){ //cria o ponteiro do novo cliente recebendo as informações por scanf
-    Elista *cliente = malloc(sizeof(Elista));
+    Elista *cliente = malloc(sizeof(Elista)); //aloca memória do struct
     printf("Nome: ");
-    scanf("%s", cliente->dados.nome);
+    scanf("%s", cliente->dados.nome); //recebe o nome
     printf("Idade: ");
-    scanf("%d", cliente->dados.idade);
+    scanf("%d", cliente->dados.idade); //recebe a idade
     printf("RG: ");
-    scanf("%s", cliente->dados.rg);
-    printf("Dia: "); //pode fazer usando o struct da biblioteca de data
-    scanf("%d", cliente->dados.data.dia);
+    scanf("%s", cliente->dados.rg); //recebe o RG
+    printf("Dia: "); 
+    scanf("%d", cliente->dados.data.dia); //recebe o dia em que as informações foram recebidas
     printf("Mês: ");
-    scanf("%d", cliente->dados.data.mes);
+    scanf("%d", cliente->dados.data.mes); //recebe o mês em que as informações foram recebidas
     printf("Ano: ");
-    scanf("%d", cliente->dados.data.ano);
-    cliente->prox = NULL;
+    scanf("%d", cliente->dados.data.ano); //recebe o ano em que as informações foram recebidas
+    cliente->prox = NULL; //deixa nulo o ponteiro do proximo desse cliente
 }
 
 void inserir(Lista *l){ //função que inseri o novo cliente na lista
-    Elista *c = cria_info();
-    if(l->qtde == 0){
-        l->inicio = c;
-    }else{
-        Elista *ant = l->inicio;
-        c->prox = ant;
-        l->inicio = c;
+    Elista *c = cria_info(); //cria um novo cliente
+    if(l->qtde == 0){ //se for o primeiro cliente da lista:
+        l->inicio = c; //coloca esse cliente como o primeiro da lista
+    }else{ //se não for:
+        Elista *ant = l->inicio; //salva o cliente que estava no começo em um ponteiro
+        c->prox = ant; //coloca esse cliente anterior como próximo do novo ponteiro
+        l->inicio = c; //coloca o novo ponteiro no início da lista
     }
-    l->qtde++;
+    l->qtde++; //aumenta o contador de contas em 1
 }
 
 void consulta(Lista *l){ //função de consulta de clientes já existentes
     printf("RG da conta que deseja ser consultado: ");
     char RG[8];
-    scanf("%s", RG);
-    Elista *c = l->inicio;
+    scanf("%s", RG); //recebe o RG do cliente
+    Elista *c = l->inicio; //gera um ponteiro de controle para encontrar o cliente com o RG desejado
     for(int i = 0; i < l->qtde; i++){
         if(c->dados.rg == RG){
-            break;
+            break; //se encontrar, sai do loop
         }
-        c = c->prox;
+        c = c->prox; //se não encontrar, ele vai para o próximo ponteiro da lista
     }
-    if(c->dados.rg != RG){
+    if(c->dados.rg != RG){ //verifica no final se o RG realmente não foi encontrado
         printf("RG não cadastrado!\n");
         return;
     }
     printf("Nome: %s; Idade: %s; Data de criação: %d/%d/%d\n", c->dados.nome, c->dados.idade, c->dados.data.dia,
-         c->dados.data.mes, c->dados.data.ano);
+         c->dados.data.mes, c->dados.data.ano); //se for encontrado, ele mostra na tela
 }
 
 void lista_clientes(Lista *l){ //mostra a lista de clientes cadastrados no sistema
@@ -112,4 +112,5 @@ void remover_cliente(Lista *l){ //remove um cliente da lista de clientes cadastr
         ant->prox = atual->prox;
     }
     free(atual);
+    l->qtde--;
 }
