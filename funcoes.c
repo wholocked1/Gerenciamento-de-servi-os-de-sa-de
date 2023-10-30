@@ -51,13 +51,14 @@ void consulta(Lista *l){ //função de consulta de clientes já existentes
     char RG[8];
     scanf("%s", RG); //recebe o RG do cliente
     Elista *c = l->inicio; //gera um ponteiro de controle para encontrar o cliente com o RG desejado
-    for(int i = 0; i < l->qtde; i++){
+    int i;
+    for(i = 0; i < l->qtde; i++){
         if(c->dados.rg == RG){
             break; //se encontrar, sai do loop
         }
         c = c->prox; //se não encontrar, ele vai para o próximo ponteiro da lista
     }
-    if(c->dados.rg != RG){ //verifica no final se o RG realmente não foi encontrado
+    if(i == l->qtde){ //verifica no final se o RG realmente não foi encontrado
         printf("RG não cadastrado!\n");
         return;
     }
