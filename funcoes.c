@@ -33,7 +33,7 @@ Elista *cria_info(){ //cria o ponteiro do novo cliente recebendo as informaçõe
     cliente->prox = NULL; //deixa nulo o ponteiro do proximo desse cliente
   return cliente;
 }
-
+//funciona
 void inserir(Lista *l){ //função que inseri o novo cliente na lista
     Elista *c = cria_info(); //cria um novo cliente
     if(l->qtde == 0){ //se for o primeiro cliente da lista:
@@ -64,7 +64,7 @@ void consulta(Lista *l){ //função de consulta de clientes já existentes
     printf("Nome: %s; Idade: %d; Data de criação: %d/%d/%d\n", c->dados.nome, c->dados.idade, c->dados.data.dia,
          c->dados.data.mes, c->dados.data.ano); //se for encontrado, ele mostra na tela
 }
-
+//funciona
 void lista_clientes(Lista *l){ //mostra a lista de clientes cadastrados no sistema
     printf("Lista de clientes: \n");
     Elista *c = l->inicio;
