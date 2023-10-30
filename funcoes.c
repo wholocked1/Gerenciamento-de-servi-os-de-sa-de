@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+
 #include "funcoes.h"
 
 void clearBuffer() { // função que limpa buffer para usar no funções_conta.c
@@ -132,3 +133,4 @@ void remover_cliente(Lista *l){ //remove um cliente da lista de clientes cadastr
     free(atual);
     l->qtde--;
 }
+
