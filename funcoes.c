@@ -109,8 +109,14 @@ void remover_cliente(Lista *l){ //remove um cliente da lista de clientes cadastr
     scanf("%s", rg); //recebe o RG do cliente que deseja ser apagado
     Elista *atual = l->inicio;
     Elista *ant = NULL;
+    if(l->qtde == 1){
+      l->inicio = NULL;
+      free(atual);
+      l->qtde--;
+      return;
+    }
     for(int i = 0; i < l->qtde; i++){ //encontra o cliente na lista de clientes
-        if(atual->dados.rg == rg){
+        if(strcmp(rg, atual->dados.rg) == 0){
             break;
         }
         ant = atual;
@@ -118,6 +124,8 @@ void remover_cliente(Lista *l){ //remove um cliente da lista de clientes cadastr
     }
     if(atual->prox == NULL){ //se for o último cliente da lista, transforma o ponteiro anterior a ele em nulo
         ant->prox = NULL;
+    }else if(ant == NULL){
+      l->inicio = atual->prox; //se for o primeiro cliente da lista, transforma o ponteiro inicio no próximo cliente da lista (ou cliente anterior)
     }else{ //se for no meio, ele coloca o ponteiro do anterior no próximo desse ponteiro
         ant->prox = atual->prox;
     }
