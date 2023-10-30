@@ -53,7 +53,7 @@ void consulta(Lista *l){ //função de consulta de clientes já existentes
     Elista *c = l->inicio; //gera um ponteiro de controle para encontrar o cliente com o RG desejado
     int i;
     for(i = 0; i < l->qtde; i++){
-        if(strcmp(rg, c->dados.rg) == 0){
+        if(strcmp(RG, c->dados.rg) == 0){
             break; //se encontrar, sai do loop
         }
         c = c->prox; //se não encontrar, ele vai para o próximo ponteiro da lista
