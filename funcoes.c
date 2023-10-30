@@ -60,7 +60,7 @@ void consulta(Lista *l){ //função de consulta de clientes já existentes
 void lista_clientes(Lista *l){ //mostra a lista de clientes cadastrados no sistema
     printf("Lista de clientes: \n");
     Elista *c = l->inicio;
-    for(int i = 0; i < l->qtde; i++){
+    for(int i = 0; i < l->qtde; i++){ //imprime a lista de clientes
         printf("Nome: %s; Idade: %d; RG: %s; Data de criação: %d/%d/%d\n", c->dados.nome, c->dados.idade, c->dados.rg,
              c->dados.data.dia, c->dados.data.mes, c->dados.data.ano);
         c = c->prox;
@@ -71,9 +71,9 @@ void lista_clientes(Lista *l){ //mostra a lista de clientes cadastrados no siste
 void atualiza_cliente(Lista *l){ //função que atualiza um cliente já cadastrados
     printf("RG do cliente que deseja ser atualizado: ");
     char rg[8];
-    scanf("%s", rg);
+    scanf("%s", rg); //recebe o RG do cliente que deseja ser atualizado
     Elista *c = l->inicio;
-    for(int i = 0; i < l->qtde; i++){
+    for(int i = 0; i < l->qtde; i++){ //encontra o cliente na lista de clientes cadastrados
         if(c->dados.rg == rg){
             break;
         }
@@ -81,13 +81,13 @@ void atualiza_cliente(Lista *l){ //função que atualiza um cliente já cadastra
     }
     int alt;
     printf("Qual informação deseja ser alterada:\n 1: Nome\n 2: Idade\n");
-    scanf("%d", &alt);
+    scanf("%d", &alt); //recebe qual o tipo de informação que deseja ser modificada
     if (alt == 1){
         printf("Nome: ");
-        scanf("%s", c->dados.nome);
+        scanf("%s", c->dados.nome); //recebe a mudança de dados e salva no ponteiro 
     }else if (alt == 2){
         printf("Idade: ");
-        scanf("%s", c->dados.idade);
+        scanf("%s", c->dados.idade); //recebe a mudança de dados e salva no ponteiro 
     }else{
         printf("Número inválido");
     }
@@ -96,19 +96,19 @@ void atualiza_cliente(Lista *l){ //função que atualiza um cliente já cadastra
 void remover_cliente(Lista *l){ //remove um cliente da lista de clientes cadastrados
     printf("RG da conta que deseja ser removida: ");
     int rg[8];
-    scanf("%s", rg);
+    scanf("%s", rg); //recebe o RG do cliente que deseja ser apagado
     Elista *atual = l->inicio;
     Elista *ant = NULL;
-    for(int i = 0; i < l->qtde; i++){
+    for(int i = 0; i < l->qtde; i++){ //encontra o cliente na lista de clientes
         if(atual->dados.rg == rg){
             break;
         }
         ant = atual;
         atual = atual->prox;
     }
-    if(atual->prox == NULL){
+    if(atual->prox == NULL){ //se for o último cliente da lista, transforma o ponteiro anterior a ele em nulo
         ant->prox = NULL;
-    }else{
+    }else{ //se for no meio, ele coloca o ponteiro do anterior no próximo desse ponteiro
         ant->prox = atual->prox;
     }
     free(atual);
