@@ -2,6 +2,13 @@
 #include <stdio.h>
 #include "funcoes.h"
 
+void clearBuffer() { // função que limpa buffer para usar no funções_conta.c
+  char c;
+  do {
+    c = getchar();
+  } while (c != '\n' && c != EOF);
+}
+
 Lista *criar_lista(){ //função que cria a lista sem nenhuma informação
     Lista *l = malloc(sizeof(Lista)); //aloca memória do struct
     l->inicio = NULL;
@@ -14,16 +21,17 @@ Elista *cria_info(){ //cria o ponteiro do novo cliente recebendo as informaçõe
     printf("Nome: ");
     scanf("%s", cliente->dados.nome); //recebe o nome
     printf("Idade: ");
-    scanf("%d", cliente->dados.idade); //recebe a idade
+    scanf("%d", &cliente->dados.idade); //recebe a idade
     printf("RG: ");
     scanf("%s", cliente->dados.rg); //recebe o RG
     printf("Dia: "); 
-    scanf("%d", cliente->dados.data.dia); //recebe o dia em que as informações foram recebidas
+    scanf("%d", &cliente->dados.data.dia); //recebe o dia em que as informações foram recebidas
     printf("Mês: ");
-    scanf("%d", cliente->dados.data.mes); //recebe o mês em que as informações foram recebidas
+    scanf("%d", &cliente->dados.data.mes); //recebe o mês em que as informações foram recebidas
     printf("Ano: ");
-    scanf("%d", cliente->dados.data.ano); //recebe o ano em que as informações foram recebidas
+    scanf("%d", &cliente->dados.data.ano); //recebe o ano em que as informações foram recebidas
     cliente->prox = NULL; //deixa nulo o ponteiro do proximo desse cliente
+  return cliente;
 }
 
 void inserir(Lista *l){ //função que inseri o novo cliente na lista
@@ -53,7 +61,7 @@ void consulta(Lista *l){ //função de consulta de clientes já existentes
         printf("RG não cadastrado!\n");
         return;
     }
-    printf("Nome: %s; Idade: %s; Data de criação: %d/%d/%d\n", c->dados.nome, c->dados.idade, c->dados.data.dia,
+    printf("Nome: %s; Idade: %d; Data de criação: %d/%d/%d\n", c->dados.nome, c->dados.idade, c->dados.data.dia,
          c->dados.data.mes, c->dados.data.ano); //se for encontrado, ele mostra na tela
 }
 
@@ -85,9 +93,10 @@ void atualiza_cliente(Lista *l){ //função que atualiza um cliente já cadastra
     if (alt == 1){
         printf("Nome: ");
         scanf("%s", c->dados.nome); //recebe a mudança de dados e salva no ponteiro 
+        clearBuffer();
     }else if (alt == 2){
         printf("Idade: ");
-        scanf("%s", c->dados.idade); //recebe a mudança de dados e salva no ponteiro 
+        scanf("%d", &c->dados.idade); //recebe a mudança de dados e salva no ponteiro 
     }else{
         printf("Número inválido");
     }
@@ -95,7 +104,7 @@ void atualiza_cliente(Lista *l){ //função que atualiza um cliente já cadastra
 
 void remover_cliente(Lista *l){ //remove um cliente da lista de clientes cadastrados
     printf("RG da conta que deseja ser removida: ");
-    int rg[8];
+    char rg[8];
     scanf("%s", rg); //recebe o RG do cliente que deseja ser apagado
     Elista *atual = l->inicio;
     Elista *ant = NULL;
