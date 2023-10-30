@@ -53,7 +53,7 @@ void consulta(Lista *l){ //função de consulta de clientes já existentes
     Elista *c = l->inicio; //gera um ponteiro de controle para encontrar o cliente com o RG desejado
     int i;
     for(i = 0; i < l->qtde; i++){
-        if(c->dados.rg == RG){
+        if(strcmp(rg, c->dados.rg) == 0){
             break; //se encontrar, sai do loop
         }
         c = c->prox; //se não encontrar, ele vai para o próximo ponteiro da lista
@@ -83,7 +83,7 @@ void atualiza_cliente(Lista *l){ //função que atualiza um cliente já cadastra
     scanf("%s", rg); //recebe o RG do cliente que deseja ser atualizado
     Elista *c = l->inicio;
     for(int i = 0; i < l->qtde; i++){ //encontra o cliente na lista de clientes cadastrados
-        if(c->dados.rg == rg){
+        if(strcmp(rg, c->dados.rg) == 0){
             break;
         }
         c = c->prox;
