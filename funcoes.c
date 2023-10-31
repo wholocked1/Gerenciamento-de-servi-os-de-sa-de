@@ -209,3 +209,23 @@ void imprimir(Fila *fila){
     }
     printf("Final da fila.\n");
 }
+
+void salvar(Lista *lista){
+    FILE *arq = fopen("pacientes.txt", "w");
+    Elista *c = lista->inicio;
+    for(int i = 0; i<lista->qtde; i++){
+        fwrite(c, sizeof(Elista), 1, arq);
+        c = c->prox;
+    }
+    fclose(arq);
+}
+
+void carregar(Lista *lista){
+    FILE *arq = fopen("pacientes.txt", "w");
+    Elista *c = lista->inicio;
+    for(int i = 0; i<lista->qtde; i++){
+        fread(c, sizeof(Elista), 1, arq);
+        c = c->prox;
+    }
+    fclose(arq);
+}
