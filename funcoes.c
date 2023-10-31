@@ -199,3 +199,13 @@ void desinfileirar(Fila *fila){
     }
     free(c);
 }
+
+void imprimir(Fila *fila){
+    printf("Fila de clientes: \n");
+    Efila *c = fila->head;
+    while(c != NULL){
+        printf("Nome: %s; RG: %s\n", c->dados.nome, c->dados.rg);
+        c = c->prox;
+    }
+    printf("Final da fila.\n");
+}
