@@ -42,3 +42,7 @@ void consulta(Lista *l);
 void lista_clientes(Lista *l);
 void atualiza_cliente(Lista *l);
 void remover_cliente(Lista *l);
+Fila *cria_fila();
+Efila *cria_efila(Lista *l);
+void enfileirar(Fila *fila, Lista *lista);
+void desinfileirar(Fila *fila);

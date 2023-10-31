@@ -160,8 +160,42 @@ Efila *cria_efila(Lista *l){
         printf("RG não encontrado.\n");
         return;
     }
+    //passagem de informação para o ponteiro da fila
+    sprintf(fila->dados.nome, "%s", c->dados.nome);
+    fila->dados.idade = c->dados.idade;
+    sprintf(fila->dados.rg, "%s", c->dados.rg);
+    fila->dados.data.ano = c->dados.data.ano;
+    fila->dados.data.mes = c->dados.data.mes;
+    fila->dados.data.dia = c->dados.data.dia;
+    return fila;
 }
 
-void enfileirar(){
+void enfileirar(Fila *fila, Lista *lista){
+    Efila *cliente = criar_efila(lista);
+    if(fila->qtde == 0){
+        fila->head = cliente;
+        fila->tail = cliente;
+        fila->qtde++;
+    }else{
+        fila->tail->prox = cliente;
+        fila->tail = cliente;
+        fila->qtde++;
+    }
+}
 
+void desinfileirar(Fila *fila){
+    if(fila==0){
+        printf("Fila vazia\n");
+        return;
+    }
+    Efila *c = fila->head;
+    if(fila->qtde == 1){
+        fila->head = NULL;
+        fila->tail = NULL;
+        fila->qtde--;
+    }else{
+        fila->head = fila->head->prox;
+        fila->qtde--;
+    }
+    free(c);
 }
