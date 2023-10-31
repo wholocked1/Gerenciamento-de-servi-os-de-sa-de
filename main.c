@@ -26,7 +26,7 @@ int main(void){
                 remover_cliente(lista);
             }
         }else if(alter == 2){
-            printf("Qual função deseja ser realizada:\n1: colocar um paciente na fila\n2: tirar um paciente da fila\n3: mostrar a fila atual");
+            printf("Qual função deseja ser realizada:\n1: colocar um paciente na fila\n2: tirar um paciente da fila\n3: mostrar a fila atual\n");
             scanf("%d", &esc);
             if(esc == 1){
                 enfileirar(fila, lista);
