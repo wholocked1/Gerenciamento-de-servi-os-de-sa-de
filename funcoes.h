@@ -22,16 +22,17 @@ typedef struct Lista //struct que vai salvar o inicio da lista e a quantidade de
     int qtde;
 }Lista;
 
-typedef struct{ //salva as informações que serão usadas na função de atendimento
-    Elista *head;
-    Elista *tail;
-    int qtde;
-}Fila;
-
 typedef struct Efila{
     Registro dados;
     struct Efila *prox;
 }Efila;
+
+typedef struct{ //salva as informações que serão usadas na função de atendimento
+    Efila *head;
+    Efila *tail;
+    int qtde;
+}Fila;
+
 
 //funções
 
@@ -46,3 +47,4 @@ Fila *cria_fila();
 Efila *cria_efila(Lista *l);
 void enfileirar(Fila *fila, Lista *lista);
 void desinfileirar(Fila *fila);
+void imprimir(Fila *fila);

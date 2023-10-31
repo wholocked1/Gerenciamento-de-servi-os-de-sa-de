@@ -158,7 +158,7 @@ Efila *cria_efila(Lista *l){
     }
     if(i == l->qtde){
         printf("RG não encontrado.\n");
-        return;
+        return NULL;
     }
     //passagem de informação para o ponteiro da fila
     sprintf(fila->dados.nome, "%s", c->dados.nome);
@@ -171,7 +171,7 @@ Efila *cria_efila(Lista *l){
 }
 
 void enfileirar(Fila *fila, Lista *lista){
-    Efila *cliente = criar_efila(lista);
+    Efila *cliente = cria_efila(lista);
     if(fila->qtde == 0){
         fila->head = cliente;
         fila->tail = cliente;
