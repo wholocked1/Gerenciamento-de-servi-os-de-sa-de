@@ -134,3 +134,34 @@ void remover_cliente(Lista *l){ //remove um cliente da lista de clientes cadastr
     l->qtde--;
 }
 
+Fila *cria_fila(){
+    Fila *fila = malloc(sizeof(Fila));
+    fila->head = NULL;
+    fila->qtde = 0;
+    fila->tail = NULL;
+    return fila;
+}
+
+Efila *cria_efila(Lista *l){
+    Efila *fila = malloc(sizeof(Efila));
+    fila->prox = NULL;
+    printf("RG do cliente que deseja entrar na fila: ");
+    char RG[8];
+    scanf("%s", RG);
+    Elista *c = l->inicio;
+    int i;
+    for(i = 0; i < l->qtde; i++){ //encontra o cliente na lista de clientes cadastrados
+        if(strcmp(RG, c->dados.rg) == 0){
+            break;
+        }
+        c = c->prox;
+    }
+    if(i == l->qtde){
+        printf("RG não encontrado.\n");
+        return;
+    }
+}
+
+void enfileirar(){
+
+}

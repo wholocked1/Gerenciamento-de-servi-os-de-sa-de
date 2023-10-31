@@ -22,6 +22,17 @@ typedef struct Lista //struct que vai salvar o inicio da lista e a quantidade de
     int qtde;
 }Lista;
 
+typedef struct{ //salva as informações que serão usadas na função de atendimento
+    Elista *head;
+    Elista *tail;
+    int qtde;
+}Fila;
+
+typedef struct Efila{
+    Registro dados;
+    struct Efila *prox;
+}Efila;
+
 //funções
 
 Lista *criar_lista();
