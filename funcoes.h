@@ -46,3 +46,4 @@ Fila *cria_fila();
 Efila *cria_efila(Lista *l);
 void enfileirar(Fila *fila, Lista *lista);
 void desinfileirar(Fila *fila);
+void imprimir(Fila *fila);
