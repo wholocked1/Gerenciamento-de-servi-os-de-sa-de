@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <string.h>
 #include "funcoes.h"
 
 void clearBuffer() { // função que limpa buffer para usar no funções_conta.c

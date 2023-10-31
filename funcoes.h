@@ -49,3 +49,4 @@ void enfileirar(Fila *fila, Lista *lista);
 void desinfileirar(Fila *fila);
 void imprimir(Fila *fila);
 void carregar(Lista *lista);
+void salvar(Lista *lista);
