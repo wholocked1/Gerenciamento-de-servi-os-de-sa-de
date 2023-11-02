@@ -12,7 +12,7 @@ typedef struct{ //salva as informações pessoais do cliente
 } Registro;
 
 typedef struct Elista{ //struct que vai salvar os dados do cliente e marcar o próximo
-    Registro dados;
+    Registro *dados;
     struct Elista *prox;
 }Elista;
 
