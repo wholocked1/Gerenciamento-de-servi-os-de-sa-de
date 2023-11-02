@@ -1,5 +1,5 @@
 #include <stdlib.h>
-
+#include<string.h>
 #include <stdio.h>
 #include "funcoes.h"
 
@@ -34,6 +34,18 @@ int main(void){
                 desinfileirar(fila);
             }else if(esc == 3){
                 imprimir(fila);
+            }else{
+                printf("Opção inválida\n");
+            }
+        }else if(alter == 3){
+
+        }else if(alter == 4){
+            printf("Qual função deseja ser realizada:\n1: Salvar\n2: Carregar\n");
+            scanf("%d", &esc);
+            if(esc == 1){
+                salvar(lista);
+            }else if(esc == 2){
+                carregar(lista);
             }else{
                 printf("Opção inválida\n");
             }

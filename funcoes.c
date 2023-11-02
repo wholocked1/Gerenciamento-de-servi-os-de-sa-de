@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <string.h>
 #include "funcoes.h"
 
 void clearBuffer() { // função que limpa buffer para usar no funções_conta.c
@@ -208,4 +208,24 @@ void imprimir(Fila *fila){
         c = c->prox;
     }
     printf("Final da fila.\n");
+}
+
+void salvar(Lista *lista){
+    FILE *arq = fopen("pacientes.txt", "w");
+    Elista *c = lista->inicio;
+    for(int i = 0; i<lista->qtde; i++){
+        fwrite(c, sizeof(Elista), 1, arq);
+        c = c->prox;
+    }
+    fclose(arq);
+}
+
+void carregar(Lista *lista){
+    FILE *arq = fopen("pacientes.txt", "w");
+    Elista *c = lista->inicio;
+    for(int i = 0; i<lista->qtde; i++){
+        fread(c, sizeof(Elista), 1, arq);
+        c = c->prox;
+    }
+    fclose(arq);
 }
