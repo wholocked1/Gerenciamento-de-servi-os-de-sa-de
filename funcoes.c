@@ -163,12 +163,12 @@ Efila *cria_efila(Lista *l){
         return NULL;
     }
     //passagem de informação para o ponteiro da fila
-    sprintf(fila->dados.nome, "%s", c->dados->nome);
-    fila->dados.idade = c->dados->idade;
-    sprintf(fila->dados.rg, "%s", c->dados->rg);
-    fila->dados.data.ano = c->dados->data.ano;
-    fila->dados.data.mes = c->dados->data.mes;
-    fila->dados.data.dia = c->dados->data.dia;
+    sprintf(fila->dados->nome, "%s", c->dados->nome);
+    fila->dados->idade = c->dados->idade;
+    sprintf(fila->dados->rg, "%s", c->dados->rg);
+    fila->dados->data.ano = c->dados->data.ano;
+    fila->dados->data.mes = c->dados->data.mes;
+    fila->dados->data.dia = c->dados->data.dia;
     return fila;
 }
 
@@ -206,7 +206,7 @@ void imprimir(Fila *fila){
     printf("Fila de clientes: \n");
     Efila *c = fila->head;
     while(c != NULL){
-        printf("Nome: %s; RG: %s\n", c->dados.nome, c->dados.rg);
+        printf("Nome: %s; RG: %s\n", c->dados->nome, c->dados->rg);
         c = c->prox;
     }
     printf("Final da fila.\n");
@@ -223,10 +223,12 @@ void salvar(Lista *lista){
 }
 
 void carregar(Lista *lista){
-    FILE *arq = fopen("pacientes.txt", "w");
+    FILE *arq = fopen("pacientes.txt", "r");
+    Registro *r = malloc(sizeof(Registro));
     Elista *c = lista->inicio;
     for(int i = 0; i<lista->qtde; i++){
-        fread(c, sizeof(Elista), 1, arq);
+        fread(r, sizeof(Registro), 1, arq);
+        c->dados = r;
         c = c->prox;
     }
     fclose(arq);
