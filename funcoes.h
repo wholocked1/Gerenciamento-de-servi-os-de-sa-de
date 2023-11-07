@@ -23,7 +23,7 @@ typedef struct Lista //struct que vai salvar o inicio da lista e a quantidade de
 }Lista;
 
 typedef struct Efila{
-    Registro dados;
+    Registro *dados;
     struct Efila *prox;
 }Efila;
 
