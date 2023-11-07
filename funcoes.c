@@ -229,3 +229,176 @@ void carregar(Lista *lista){
     }
     fclose(arq);
 }
+
+Arvore *cria_arvore() {
+  Arvore *arvore = malloc(sizeof(Arvore));
+  arvore->raiz = NULL;
+  arvore->qtde = 0;
+
+  return arvore;
+}
+
+Vertice *cria_vertice(Arvore *arvore, Registro *registro) {
+  Vertice *novo = malloc(sizeof(Vertice));
+  novo->dir = NULL;
+  novo->esq = NULL;
+  novo->pai = NULL;
+  novo->registro = registro;
+  return novo;
+}
+
+void mostrar(Vertice *raiz){
+    if(raiz != NULL){
+        mostrar(raiz->esq);
+        printf("%s ", raiz->registro->nome);
+        mostrar(raiz->dir);        
+    }
+}
+
+void pesquisa_ano(Lista *lista){
+    Elista *c = lista->inicio;
+    Arvore *arvore = cria_arvore();
+    for (int i = 0; i < lista->qtde; i++){
+        insere_ano(arvore, &c->dados);
+        c=c->prox;
+    }
+    mostrar(arvore->raiz);
+    printf("\n");
+}
+
+void pesquisa_mes(Lista *lista){
+    Elista *c = lista->inicio;
+    Arvore *arvore = cria_arvore();
+    for (int i = 0; i < lista->qtde; i++){
+        insere_mes(arvore, &c->dados);
+        c=c->prox;
+    }
+    mostrar(arvore->raiz);
+    printf("\n");
+}
+
+void pesquisa_dia(Lista *lista){
+    Elista *c = lista->inicio;
+    Arvore *arvore = cria_arvore();
+    for (int i = 0; i < lista->qtde; i++){
+        insere_dia(arvore, &c->dados);
+        c=c->prox;
+    }
+    mostrar(arvore->raiz);
+    printf("\n");
+}
+
+void pesquisa_idade(Lista *lista){
+    Elista *c = lista->inicio;
+    Arvore *arvore = cria_arvore();
+    for (int i = 0; i < lista->qtde; i++){
+        insere_idade(arvore, &c->dados);
+        c=c->prox;
+    }
+    mostrar(arvore->raiz);
+    printf("\n");
+}
+
+void insere_ano(Arvore *arvore, Registro *registro) {
+  Vertice *vertice = cria_vertice(arvore, registro);
+  int valor = registro->data.ano;
+  if (arvore->qtde == 0) {
+    arvore->raiz = vertice;
+  } else {
+    Vertice *aux = arvore->raiz;
+    while (aux != NULL) {
+      if (valor < aux->registro->data.ano && aux->esq == NULL) {
+        aux->esq = vertice;
+        vertice->pai = aux;
+        break;
+      } else if (valor > aux->registro->data.ano && aux->dir == NULL) {
+        aux->dir = vertice;
+        vertice->pai = aux;
+        break;
+      } else if (valor < aux->registro->data.ano) {
+        aux = aux->esq;
+      } else if (valor > aux->registro->data.ano) {
+        aux = aux->dir;
+      }
+    }
+  }
+  arvore->qtde++;
+}
+
+void insere_mes(Arvore *arvore, Registro *registro) {
+  Vertice *vertice = cria_vertice(arvore, registro);
+  int valor = registro->data.mes;
+  if (arvore->qtde == 0) {
+    arvore->raiz = vertice;
+  } else {
+    Vertice *aux = arvore->raiz;
+    while (aux != NULL) {
+      if (valor < aux->registro->data.mes && aux->esq == NULL) {
+        aux->esq = vertice;
+        vertice->pai = aux;
+        break;
+      } else if (valor > aux->registro->data.mes && aux->dir == NULL) {
+        aux->dir = vertice;
+        vertice->pai = aux;
+        break;
+      } else if (valor < aux->registro->data.mes) {
+        aux = aux->esq;
+      } else if (valor > aux->registro->data.mes) {
+        aux = aux->dir;
+      }
+    }
+  }
+  arvore->qtde++;
+}
+
+void insere_dia(Arvore *arvore, Registro *registro) {
+  Vertice *vertice = cria_vertice(arvore, registro);
+  int valor = registro->data.dia;
+  if (arvore->qtde == 0) {
+    arvore->raiz = vertice;
+  } else {
+    Vertice *aux = arvore->raiz;
+    while (aux != NULL) {
+      if (valor < aux->registro->data.dia && aux->esq == NULL) {
+        aux->esq = vertice;
+        vertice->pai = aux;
+        break;
+      } else if (valor > aux->registro->data.dia && aux->dir == NULL) {
+        aux->dir = vertice;
+        vertice->pai = aux;
+        break;
+      } else if (valor < aux->registro->data.dia) {
+        aux = aux->esq;
+      } else if (valor > aux->registro->data.dia) {
+        aux = aux->dir;
+      }
+    }
+  }
+  arvore->qtde++;
+}
+
+void insere_idade(Arvore *arvore, Registro *registro) {
+  Vertice *vertice = cria_vertice(arvore, registro);
+  int valor = registro->idade;
+  if (arvore->qtde == 0) {
+    arvore->raiz = vertice;
+  } else {
+    Vertice *aux = arvore->raiz;
+    while (aux != NULL) {
+      if (valor < aux->registro->idade && aux->esq == NULL) {
+        aux->esq = vertice;
+        vertice->pai = aux;
+        break;
+      } else if (valor > aux->registro->idade && aux->dir == NULL) {
+        aux->dir = vertice;
+        vertice->pai = aux;
+        break;
+      } else if (valor < aux->registro->idade) {
+        aux = aux->esq;
+      } else if (valor > aux->registro->idade) {
+        aux = aux->dir;
+      }
+    }
+  }
+  arvore->qtde++;
+}

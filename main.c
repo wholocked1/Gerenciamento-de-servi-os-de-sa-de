@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include<string.h>
+#include <string.h>
 #include <stdio.h>
 #include "funcoes.h"
 
@@ -38,6 +38,19 @@ int main(void){
                 printf("Opção inválida\n");
             }
         }else if(alter == 3){
+            printf("Qual função deseja ser realizada:\n1: Ordenar por ano de registro.\n2: Ordenar por mes de registro.\n3: Ordenar por dia de registro.\n4: Ordenar por idade do paciente.\n");
+            scanf("%d", &esc);
+            if(esc == 1){
+                pesquisa_ano(lista);
+            } else if( esc == 2){
+                pesquisa_mes(lista);
+            } else if ( esc == 3){
+                pesquisa_dia(lista);
+            } else if( esc == 4) {
+                pesquisa_idade(lista);
+            } else {
+                printf("Opção inválida\n");
+            }
 
         }else if(alter == 4){
             printf("Qual função deseja ser realizada:\n1: Salvar\n2: Carregar\n");
