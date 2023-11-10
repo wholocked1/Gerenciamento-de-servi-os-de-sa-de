@@ -12,7 +12,7 @@ typedef struct{ //salva as informações pessoais do cliente
 } Registro;
 
 typedef struct Elista{ //struct que vai salvar os dados do cliente e marcar o próximo
-    Registro dados;
+    Registro *dados;
     struct Elista *prox;
 }Elista;
 
@@ -23,7 +23,7 @@ typedef struct Lista //struct que vai salvar o inicio da lista e a quantidade de
 }Lista;
 
 typedef struct Efila{
-    Registro dados;
+    Registro *dados;
     struct Efila *prox;
 }Efila;
 
@@ -39,6 +39,12 @@ typedef struct Vertice {
     struct Vertice *dir;
     struct Vertice *pai;
 } Vertice;
+
+typedef struct 
+{
+    Registro *r[100];
+    int qtde;
+}List;
 
 typedef struct Arvore {
     Vertice *raiz;
