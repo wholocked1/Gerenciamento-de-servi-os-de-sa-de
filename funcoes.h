@@ -33,6 +33,13 @@ typedef struct{ //salva as informações que serão usadas na função de atendi
     int qtde;
 }Fila;
 
+typedef struct 
+{
+    Registro *r[100];
+    int qtde;
+}List;
+
+
 
 //funções
 
