@@ -271,7 +271,7 @@ void pesquisa_ano(Lista *lista){
     Elista *c = lista->inicio;
     Arvore *arvore = cria_arvore();
     for (int i = 0; i < lista->qtde; i++){
-        insere_ano(arvore, &c->dados);
+        insere_ano(arvore, c->dados);
         c=c->prox;
     }
     mostrar(arvore->raiz);
@@ -282,7 +282,7 @@ void pesquisa_mes(Lista *lista){
     Elista *c = lista->inicio;
     Arvore *arvore = cria_arvore();
     for (int i = 0; i < lista->qtde; i++){
-        insere_mes(arvore, &c->dados);
+        insere_mes(arvore, c->dados);
         c=c->prox;
     }
     mostrar(arvore->raiz);
@@ -293,7 +293,7 @@ void pesquisa_dia(Lista *lista){
     Elista *c = lista->inicio;
     Arvore *arvore = cria_arvore();
     for (int i = 0; i < lista->qtde; i++){
-        insere_dia(arvore, &c->dados);
+        insere_dia(arvore, c->dados);
         c=c->prox;
     }
     mostrar(arvore->raiz);
@@ -304,7 +304,7 @@ void pesquisa_idade(Lista *lista){
     Elista *c = lista->inicio;
     Arvore *arvore = cria_arvore();
     for (int i = 0; i < lista->qtde; i++){
-        insere_idade(arvore, &c->dados);
+        insere_idade(arvore, c->dados);
         c=c->prox;
     }
     mostrar(arvore->raiz);
