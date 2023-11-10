@@ -19,22 +19,24 @@ Lista *criar_lista(){ //função que cria a lista sem nenhuma informação
 
 Elista *cria_info(){ //cria o ponteiro do novo cliente recebendo as informações por scanf
     Elista *cliente = malloc(sizeof(Elista)); //aloca memória do struct
+    cliente->dados = malloc(sizeof(Registro)); //aloca memória para as informações do registro
     printf("Nome: ");
-    scanf("%s", cliente->dados.nome); //recebe o nome
+    scanf("%100s", cliente->dados->nome); //recebe o nome
+    clearBuffer();
     printf("Idade: ");
-    scanf("%d", &cliente->dados.idade); //recebe a idade
+    scanf("%d", &cliente->dados->idade); //recebe a idade
     printf("RG: ");
-    scanf("%s", cliente->dados.rg); //recebe o RG
+    scanf("%s", cliente->dados->rg); //recebe o RG
     printf("Dia: "); 
-    scanf("%d", &cliente->dados.data.dia); //recebe o dia em que as informações foram recebidas
+    scanf("%d", &cliente->dados->data.dia); //recebe o dia em que as informações foram recebidas
     printf("Mês: ");
-    scanf("%d", &cliente->dados.data.mes); //recebe o mês em que as informações foram recebidas
+    scanf("%d", &cliente->dados->data.mes); //recebe o mês em que as informações foram recebidas
     printf("Ano: ");
-    scanf("%d", &cliente->dados.data.ano); //recebe o ano em que as informações foram recebidas
+    scanf("%d", &cliente->dados->data.ano); //recebe o ano em que as informações foram recebidas
     cliente->prox = NULL; //deixa nulo o ponteiro do proximo desse cliente
   return cliente;
 }
-//funciona
+
 void inserir(Lista *l){ //função que inseri o novo cliente na lista
     Elista *c = cria_info(); //cria um novo cliente
     if(l->qtde == 0){ //se for o primeiro cliente da lista:
@@ -54,7 +56,7 @@ void consulta(Lista *l){ //função de consulta de clientes já existentes
     Elista *c = l->inicio; //gera um ponteiro de controle para encontrar o cliente com o RG desejado
     int i;
     for(i = 0; i < l->qtde; i++){
-        if(strcmp(RG, c->dados.rg) == 0){
+        if(strcmp(RG, c->dados->rg) == 0){
             break; //se encontrar, sai do loop
         }
         c = c->prox; //se não encontrar, ele vai para o próximo ponteiro da lista
@@ -63,16 +65,17 @@ void consulta(Lista *l){ //função de consulta de clientes já existentes
         printf("RG não cadastrado!\n");
         return;
     }
-    printf("Nome: %s; Idade: %d; Data de criação: %d/%d/%d\n", c->dados.nome, c->dados.idade, c->dados.data.dia,
-         c->dados.data.mes, c->dados.data.ano); //se for encontrado, ele mostra na tela
+    printf("Nome: %s; Idade: %d; Data de criação: %d/%d/%d\n", c->dados->nome, c->dados->idade, c->dados->data.dia,
+         c->dados->data.mes, c->dados->data.ano); //se for encontrado, ele mostra na tela
 }
 //funciona
 void lista_clientes(Lista *l){ //mostra a lista de clientes cadastrados no sistema
     printf("Lista de clientes: \n");
     Elista *c = l->inicio;
+    printf("%d", l->qtde);
     for(int i = 0; i < l->qtde; i++){ //imprime a lista de clientes
-        printf("Nome: %s; Idade: %d; RG: %s; Data de criação: %d/%d/%d\n", c->dados.nome, c->dados.idade, c->dados.rg,
-             c->dados.data.dia, c->dados.data.mes, c->dados.data.ano);
+        printf("Nome: %s; Idade: %d; RG: %s; Data de criação: %d/%d/%d\n", c->dados->nome, c->dados->idade, c->dados->rg,
+             c->dados->data.dia, c->dados->data.mes, c->dados->data.ano);
         c = c->prox;
     }
     printf("\n");
@@ -84,7 +87,7 @@ void atualiza_cliente(Lista *l){ //função que atualiza um cliente já cadastra
     scanf("%s", rg); //recebe o RG do cliente que deseja ser atualizado
     Elista *c = l->inicio;
     for(int i = 0; i < l->qtde; i++){ //encontra o cliente na lista de clientes cadastrados
-        if(strcmp(rg, c->dados.rg) == 0){
+        if(strcmp(rg, c->dados->rg) == 0){
             break;
         }
         c = c->prox;
@@ -94,11 +97,11 @@ void atualiza_cliente(Lista *l){ //função que atualiza um cliente já cadastra
     scanf("%d", &alt); //recebe qual o tipo de informação que deseja ser modificada
     if (alt == 1){
         printf("Nome: ");
-        scanf("%s", c->dados.nome); //recebe a mudança de dados e salva no ponteiro 
+        scanf("%s", c->dados->nome); //recebe a mudança de dados e salva no ponteiro 
         clearBuffer();
     }else if (alt == 2){
         printf("Idade: ");
-        scanf("%d", &c->dados.idade); //recebe a mudança de dados e salva no ponteiro 
+        scanf("%d", &c->dados->idade); //recebe a mudança de dados e salva no ponteiro 
     }else{
         printf("Número inválido");
     }
@@ -117,7 +120,7 @@ void remover_cliente(Lista *l){ //remove um cliente da lista de clientes cadastr
       return;
     }
     for(int i = 0; i < l->qtde; i++){ //encontra o cliente na lista de clientes
-        if(strcmp(rg, atual->dados.rg) == 0){
+        if(strcmp(rg, atual->dados->rg) == 0){
             break;
         }
         ant = atual;
@@ -151,7 +154,7 @@ Efila *cria_efila(Lista *l){
     Elista *c = l->inicio;
     int i;
     for(i = 0; i < l->qtde; i++){ //encontra o cliente na lista de clientes cadastrados
-        if(strcmp(RG, c->dados.rg) == 0){
+        if(strcmp(RG, c->dados->rg) == 0){
             break;
         }
         c = c->prox;
@@ -161,12 +164,12 @@ Efila *cria_efila(Lista *l){
         return NULL;
     }
     //passagem de informação para o ponteiro da fila
-    sprintf(fila->dados.nome, "%s", c->dados.nome);
-    fila->dados.idade = c->dados.idade;
-    sprintf(fila->dados.rg, "%s", c->dados.rg);
-    fila->dados.data.ano = c->dados.data.ano;
-    fila->dados.data.mes = c->dados.data.mes;
-    fila->dados.data.dia = c->dados.data.dia;
+    sprintf(fila->dados->nome, "%s", c->dados->nome);
+    fila->dados->idade = c->dados->idade;
+    sprintf(fila->dados->rg, "%s", c->dados->rg);
+    fila->dados->data.ano = c->dados->data.ano;
+    fila->dados->data.mes = c->dados->data.mes;
+    fila->dados->data.dia = c->dados->data.dia;
     return fila;
 }
 
@@ -204,7 +207,7 @@ void imprimir(Fila *fila){
     printf("Fila de clientes: \n");
     Efila *c = fila->head;
     while(c != NULL){
-        printf("Nome: %s; RG: %s\n", c->dados.nome, c->dados.rg);
+        printf("Nome: %s; RG: %s\n", c->dados->nome, c->dados->rg);
         c = c->prox;
     }
     printf("Final da fila.\n");
@@ -213,18 +216,27 @@ void imprimir(Fila *fila){
 void salvar(Lista *lista){
     FILE *arq = fopen("pacientes.txt", "w");
     Elista *c = lista->inicio;
+    List *list = malloc(sizeof(List));
+    list->qtde = 0;
     for(int i = 0; i<lista->qtde; i++){
-        fwrite(c, sizeof(Elista), 1, arq);
+        list->r[list->qtde] = c->dados;
         c = c->prox;
+        list->qtde++;
     }
+    fwrite(list, sizeof(List), 1, arq);
     fclose(arq);
 }
 
 void carregar(Lista *lista){
-    FILE *arq = fopen("pacientes.txt", "w");
-    Elista *c = lista->inicio;
-    for(int i = 0; i<lista->qtde; i++){
-        fread(c, sizeof(Elista), 1, arq);
+    FILE *arq = fopen("pacientes.txt", "r");
+    Elista *c = malloc(sizeof(Elista));
+    List *list = malloc(sizeof(List));
+    fread(list, sizeof(List), 1, arq);
+    lista->inicio->dados = list->r[0];
+    c = lista->inicio->prox;
+    lista->qtde = list->qtde;
+    for(int i = 1; i<list->qtde; i++){
+        lista->inicio->dados = list->r[i];
         c = c->prox;
     }
     fclose(arq);
