@@ -62,6 +62,8 @@ int main(void){
             }else{
                 printf("Opção inválida\n");
             }
+        }else if(alter == 5){
+            printf(" Nome dos participantes: Ana Carolina Cogo Nami & Enzo Lima Cassin\n Ciclo: 4º ciclo/semestre\n Curso: Ciência da Computação\n Disciplina: Estrutura de Dados\n Data: 10/11/2023\n");
         }
         printf("Escolha a alternativa com a ação desejada:\n1: Cadastro de clientes\n2: Atendimento\n3: Pesquisa\n4: Carregar/Salvar\n5: Sobre\n6: Sair\n");
         scanf("%d", &alter);
