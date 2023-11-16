@@ -331,6 +331,10 @@ void insere_ano(Arvore *arvore, Registro *registro) {
         aux = aux->esq;
       } else if (valor > aux->registro->data.ano) {
         aux = aux->dir;
+      } else if ( valor == aux->registro->data.ano && aux->esq == NULL){
+        aux->esq = vertice;
+        vertice->pai = aux;
+        break;
       }
     }
   }
@@ -357,6 +361,10 @@ void insere_mes(Arvore *arvore, Registro *registro) {
         aux = aux->esq;
       } else if (valor > aux->registro->data.mes) {
         aux = aux->dir;
+      } else if ( valor == aux->registro->data.mes && aux->esq == NULL){
+        aux->esq = vertice;
+        vertice->pai = aux;
+        break;
       }
     }
   }
@@ -383,6 +391,10 @@ void insere_dia(Arvore *arvore, Registro *registro) {
         aux = aux->esq;
       } else if (valor > aux->registro->data.dia) {
         aux = aux->dir;
+      } else if ( valor == aux->registro->data.dia && aux->esq == NULL){
+        aux->esq = vertice;
+        vertice->pai = aux;
+        break;
       }
     }
   }
@@ -409,6 +421,10 @@ void insere_idade(Arvore *arvore, Registro *registro) {
         aux = aux->esq;
       } else if (valor > aux->registro->idade) {
         aux = aux->dir;
+      } else if ( valor == aux->registro->idade && aux->esq == NULL){
+        aux->esq = vertice;
+        vertice->pai = aux;
+        break;
       }
     }
   }
