@@ -214,32 +214,65 @@ void imprimir(Fila *fila){
 }
 
 void salvar(Lista *lista){
-    FILE *arq = fopen("pacientes.txt", "w");
-    Elista *c = lista->inicio;
-    List *list = malloc(sizeof(List));
-    list->qtde = 0;
-    for(int i = 0; i<lista->qtde; i++){
-        list->r[list->qtde] = c->dados;
-        c = c->prox;
-        list->qtde++;
-    }
-    fwrite(list, sizeof(List), 1, arq);
-    fclose(arq);
+  FILE *arq = fopen("pacientes.txt", "w"); // Abre o arquivo para escrita
+  Elista *c = lista->inicio;
+  fprintf(arq, "%d\n", lista->qtde); // Anota a quantidade de elementos na lista de pacientes
+  for (int i = 0; i < lista->qtde; i++) { // Roda o codigo abaixo para a quantidade de pacientes e salva no arquivo cada uma das informações
+    fprintf(arq, "%s\n", c->dados->nome);
+    fprintf(arq, "%d\n", c->dados->idade);
+    fprintf(arq, "%s\n", c->dados->rg);
+    fprintf(arq, "%d\n", c->dados->data.dia);
+    fprintf(arq, "%d\n", c->dados->data.mes);
+    fprintf(arq, "%d\n", c->dados->data.ano);
+    c = c->prox; // Passa para o próximo cliente da lista
+  }
+  fclose(arq); // Fecha o arquivo
 }
 
 void carregar(Lista *lista){
-    FILE *arq = fopen("pacientes.txt", "r");
-    Elista *c = malloc(sizeof(Elista));
-    List *list = malloc(sizeof(List));
-    fread(list, sizeof(List), 1, arq);
-    lista->inicio->dados = list->r[0];
-    c = lista->inicio->prox;
-    lista->qtde = list->qtde;
-    for(int i = 1; i<list->qtde; i++){
-        lista->inicio->dados = list->r[i];
-        c = c->prox;
+    FILE *arq =fopen("pacientes.txt", "r"); // Abre o arquivo dos pacientes para leitura
+  fscanf(arq, "%d", &lista->qtde); // Atualiza a quantidade de clientes para qual tinha salvo no arquivo
+  fclose(arq);
+  carrega_info(lista, 0);
+}
+
+void carrega_info(Lista *lista, int i) {
+  if(i == lista->qtde){return;} // Caso me contador chega na quantidade de clientes e para a recursividade da função
+  FILE *arq = fopen("pacientes.txt", "r"); // Abre o arquivo dos pacientes para leitura
+  Elista *c = malloc(sizeof(Elista));
+  c->prox = NULL;
+  Registro *r = malloc(sizeof(Registro));
+  // variáveis criadas para salvar os elementos do arquivo e passar para o struct de registro
+  int buffer, idade, dia, mes, ano; 
+  char nome [100];
+  char rg[8];
+  fscanf(arq, "%d", &buffer);
+  for(int j = 0; j <= i; j++){ // roda o código para salvar os dados de um cliente
+    fscanf(arq, "%s", nome);
+    fscanf(arq, "%d", &idade);
+    fscanf(arq, "%s", rg);
+    fscanf(arq, "%d", &dia);
+    fscanf(arq, "%d", &mes);
+    fscanf(arq, "%d", &ano);
+  }
+  strcpy(r->nome, nome);
+  r->idade = idade;
+  strcpy(r->rg, rg);
+  r->data.dia = dia;
+  r->data.mes = mes;
+  r->data.ano = ano;
+  c->dados = r;
+  if (i == 0) {      // se for o primeiro cliente da lista:
+    lista->inicio = c;         // coloca esse cliente como o primeiro da lista
+  } else {                 // se não for:
+    Elista *dado = lista->inicio; // salva o cliente que estava no começo em um ponteiro
+    while(dado->prox != NULL){
+      dado = dado->prox;
     }
-    fclose(arq);
+    dado->prox = c; // coloca esse cliente anterior como próximo do novo ponteiro
+  }
+  fclose(arq);
+  carrega_info(lista, i+1); // recursividade da função para re adicionar todos os clientes na lista
 }
 
 Arvore *cria_arvore() {

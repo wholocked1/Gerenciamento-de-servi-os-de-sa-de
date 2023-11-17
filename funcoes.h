@@ -81,3 +81,4 @@ void desinfileirar(Fila *fila);
 void imprimir(Fila *fila);
 void carregar(Lista *lista);
 void salvar(Lista *lista);
+void carrega_info(Lista *lista, int i);
