@@ -139,7 +139,7 @@ void remover_cliente(Lista *l){ //remove um cliente da lista de clientes cadastr
     l->qtde--;
 }
 
-Fila *cria_fila(){
+Fila *cria_fila(){ //cria uma fila nova para o atendimento 
     Fila *fila = malloc(sizeof(Fila));
     fila->head = NULL;
     fila->qtde = 0;
@@ -147,12 +147,11 @@ Fila *cria_fila(){
     return fila;
 }
 
-Efila *cria_efila(Lista *l){
+Efila *cria_efila(Lista *l){ //cria uma Efila (ficha do cliente que deseja ser atendido) com base nos dados do cadastro
     Efila *fila = malloc(sizeof(Efila));
     fila->dados = malloc(sizeof(Registro));
     fila->prox = NULL;
     printf("RG do cliente que deseja entrar na fila: ");
-    //char RG[8];
     int RG;
     scanf("%d", &RG);
     char rg[8];
@@ -179,37 +178,37 @@ Efila *cria_efila(Lista *l){
     return fila;
 }
 
-void enfileirar(Fila *fila, Lista *lista){
+void enfileirar(Fila *fila, Lista *lista){ //coloca a pessoa na fila de clientes a serem atendidos
     Efila *cliente = cria_efila(lista);
-    if(fila->qtde == 0){
+    if(fila->qtde == 0){ //se não houver nenhum cliente
         fila->head = cliente;
         fila->tail = cliente;
         fila->qtde++;
-    }else{
+    }else{ //se já houver cliente
         fila->tail->prox = cliente;
         fila->tail = cliente;
         fila->qtde++;
     }
 }
 
-void desinfileirar(Fila *fila){
+void desinfileirar(Fila *fila){ //tira a pessoa que acabou de ser chamada ao atendimento (primeiro da fila)
     if(fila==0){
         printf("Fila vazia\n");
         return;
     }
     Efila *c = fila->head;
-    if(fila->qtde == 1){
+    if(fila->qtde == 1){ //se for o único da fila
         fila->head = NULL;
         fila->tail = NULL;
         fila->qtde--;
-    }else{
+    }else{ //se não for o único da fila
         fila->head = fila->head->prox;
         fila->qtde--;
     }
-    free(c);
+    free(c); //libera o espaço ocupado por esse ponteiro na memória
 }
 
-void imprimir(Fila *fila){
+void imprimir(Fila *fila){ //mostra a fila de paciêntes
     printf("Fila de clientes: \n");
     Efila *c = fila->head;
     while(c != NULL){
@@ -219,7 +218,7 @@ void imprimir(Fila *fila){
     printf("Final da fila.\n");
 }
 
-void salvar(Lista *lista){
+void salvar(Lista *lista){ //salva as informações dos clientes em um arquivo TXT
   FILE *arq = fopen("pacientes.txt", "w"); // Abre o arquivo para escrita
   Elista *c = lista->inicio;
   fprintf(arq, "%d\n", lista->qtde); // Anota a quantidade de elementos na lista de pacientes
@@ -235,14 +234,14 @@ void salvar(Lista *lista){
   fclose(arq); // Fecha o arquivo
 }
 
-void carregar(Lista *lista){
+void carregar(Lista *lista){ //carrega as informações dos clientes de volta à função de um arquivo TXT
     FILE *arq =fopen("pacientes.txt", "r"); // Abre o arquivo dos pacientes para leitura
   fscanf(arq, "%d", &lista->qtde); // Atualiza a quantidade de clientes para qual tinha salvo no arquivo
   fclose(arq);
   carrega_info(lista, 0);
 }
 
-void carrega_info(Lista *lista, int i) {
+void carrega_info(Lista *lista, int i) { //função suporte para carregamento das informações
   if(i == lista->qtde){return;} // Caso me contador chega na quantidade de clientes e para a recursividade da função
   FILE *arq = fopen("pacientes.txt", "r"); // Abre o arquivo dos pacientes para leitura
   Elista *c = malloc(sizeof(Elista));
@@ -281,7 +280,7 @@ void carrega_info(Lista *lista, int i) {
   carrega_info(lista, i+1); // recursividade da função para re adicionar todos os clientes na lista
 }
 
-Arvore *cria_arvore() {
+Arvore *cria_arvore() { //cria a árvore
   Arvore *arvore = malloc(sizeof(Arvore));
   arvore->raiz = NULL;
   arvore->qtde = 0;
@@ -289,7 +288,7 @@ Arvore *cria_arvore() {
   return arvore;
 }
 
-Vertice *cria_vertice(Arvore *arvore, Registro *registro) {
+Vertice *cria_vertice(Arvore *arvore, Registro *registro) { //cria um vértice novo
   Vertice *novo = malloc(sizeof(Vertice));
   novo->dir = NULL;
   novo->esq = NULL;
@@ -298,7 +297,7 @@ Vertice *cria_vertice(Arvore *arvore, Registro *registro) {
   return novo;
 }
 
-void mostrar(Vertice *raiz){
+void mostrar(Vertice *raiz){ //imprime a árvore
     if(raiz != NULL){
         mostrar(raiz->esq);
         printf("%s ", raiz->registro->nome);
@@ -306,7 +305,7 @@ void mostrar(Vertice *raiz){
     }
 }
 
-void pesquisa_ano(Lista *lista){
+void pesquisa_ano(Lista *lista){ //faz a pesquisa por ano de cadastro
     Elista *c = lista->inicio;
     Arvore *arvore = cria_arvore();
     for (int i = 0; i < lista->qtde; i++){
@@ -317,7 +316,7 @@ void pesquisa_ano(Lista *lista){
     printf("\n");
 }
 
-void pesquisa_mes(Lista *lista){
+void pesquisa_mes(Lista *lista){ //faz a pesquisa por mês de cadastro
     Elista *c = lista->inicio;
     Arvore *arvore = cria_arvore();
     for (int i = 0; i < lista->qtde; i++){
@@ -328,7 +327,7 @@ void pesquisa_mes(Lista *lista){
     printf("\n");
 }
 
-void pesquisa_dia(Lista *lista){
+void pesquisa_dia(Lista *lista){ //faz a pesquisa por dia de cadastro
     Elista *c = lista->inicio;
     Arvore *arvore = cria_arvore();
     for (int i = 0; i < lista->qtde; i++){
@@ -339,7 +338,7 @@ void pesquisa_dia(Lista *lista){
     printf("\n");
 }
 
-void pesquisa_idade(Lista *lista){
+void pesquisa_idade(Lista *lista){ //faz a pesquisa pela idade do paciênte
     Elista *c = lista->inicio;
     Arvore *arvore = cria_arvore();
     for (int i = 0; i < lista->qtde; i++){
@@ -350,7 +349,7 @@ void pesquisa_idade(Lista *lista){
     printf("\n");
 }
 
-void insere_ano(Arvore *arvore, Registro *registro) {
+void insere_ano(Arvore *arvore, Registro *registro) { //cria a árvore por ano
   Vertice *vertice = cria_vertice(arvore, registro);
   int valor = registro->data.ano;
   if (arvore->qtde == 0) {
@@ -380,7 +379,7 @@ void insere_ano(Arvore *arvore, Registro *registro) {
   arvore->qtde++;
 }
 
-void insere_mes(Arvore *arvore, Registro *registro) {
+void insere_mes(Arvore *arvore, Registro *registro) {//cria a árvore por mês
   Vertice *vertice = cria_vertice(arvore, registro);
   int valor = registro->data.mes;
   if (arvore->qtde == 0) {
@@ -410,7 +409,7 @@ void insere_mes(Arvore *arvore, Registro *registro) {
   arvore->qtde++;
 }
 
-void insere_dia(Arvore *arvore, Registro *registro) {
+void insere_dia(Arvore *arvore, Registro *registro) { //cria a árvore por dia
   Vertice *vertice = cria_vertice(arvore, registro);
   int valor = registro->data.dia;
   if (arvore->qtde == 0) {
@@ -440,7 +439,7 @@ void insere_dia(Arvore *arvore, Registro *registro) {
   arvore->qtde++;
 }
 
-void insere_idade(Arvore *arvore, Registro *registro) {
+void insere_idade(Arvore *arvore, Registro *registro) { //cria a árvore por idade
   Vertice *vertice = cria_vertice(arvore, registro);
   int valor = registro->idade;
   if (arvore->qtde == 0) {
