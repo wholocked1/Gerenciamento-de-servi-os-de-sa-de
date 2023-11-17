@@ -72,7 +72,6 @@ void consulta(Lista *l){ //função de consulta de clientes já existentes
 void lista_clientes(Lista *l){ //mostra a lista de clientes cadastrados no sistema
     printf("Lista de clientes: \n");
     Elista *c = l->inicio;
-    printf("%d", l->qtde);
     for(int i = 0; i < l->qtde; i++){ //imprime a lista de clientes
         printf("Nome: %s; Idade: %d; RG: %s; Data de criação: %d/%d/%d\n", c->dados->nome, c->dados->idade, c->dados->rg,
              c->dados->data.dia, c->dados->data.mes, c->dados->data.ano);
