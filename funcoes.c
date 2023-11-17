@@ -101,7 +101,9 @@ void atualiza_cliente(Lista *l){ //função que atualiza um cliente já cadastra
         clearBuffer();
     }else if (alt == 2){
         printf("Idade: ");
-        scanf("%d", &c->dados->idade); //recebe a mudança de dados e salva no ponteiro 
+        int idade;
+        scanf("%d", &idade); //recebe a mudança de dados e salva no ponteiro 
+        c->dados->idade = idade;
     }else{
         printf("Número inválido");
     }
