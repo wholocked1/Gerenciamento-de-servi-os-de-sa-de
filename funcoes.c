@@ -147,14 +147,18 @@ Fila *cria_fila(){
 
 Efila *cria_efila(Lista *l){
     Efila *fila = malloc(sizeof(Efila));
+    fila->dados = malloc(sizeof(Registro));
     fila->prox = NULL;
     printf("RG do cliente que deseja entrar na fila: ");
-    char RG[8];
-    scanf("%s", RG);
+    //char RG[8];
+    int RG;
+    scanf("%d", &RG);
+    char rg[8];
+    sprintf(rg, "%d", RG);
     Elista *c = l->inicio;
     int i;
     for(i = 0; i < l->qtde; i++){ //encontra o cliente na lista de clientes cadastrados
-        if(strcmp(RG, c->dados->rg) == 0){
+        if(strcmp(rg, c->dados->rg) == 0){
             break;
         }
         c = c->prox;
